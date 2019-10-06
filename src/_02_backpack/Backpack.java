@@ -19,17 +19,17 @@ public class Backpack {
 
 
 
-	public void putInBackpack(Pencil supply) {
+	public static void putInBackpack(Pencil supply) {
 		this.pencil = supply;
 		log(supply);
 	}
 
-	public void putInBackpack(Ruler supply) {
+	public static void putInBackpack(Ruler supply) {
 		this.ruler = supply;
 		log(supply);
 	}
 
-	public void putInBackpack(Textbook supply) {
+	public static void putInBackpack(Textbook supply) {
 		this.textbook = supply;
 		log(supply);
 	}

@@ -5,25 +5,54 @@ package _03_jukebox;
  */
 
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.JPanel;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	JFrame frame = new JFrame("Jukebox");
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
+	JButton b1 = new JButton("Song 1");
+	JButton b2 = new JButton("Song 2");
+	JButton b3 = new JButton("Song 3");
+	Song song1 = new Song("song1.mp3");
+	Song song2 = new Song("song2.mp3");
+	Song song3 = new Song("song3.mp3");
     public void run() {
 
+    	frame.add(panel);
+    	panel.add(label);
+    	panel.add(b1);
+    	panel.add(b2);
+    	panel.add(b3);
+    	b1.addActionListener(this);
+    	b2.addActionListener(this);
+    	b3.addActionListener(this);
+    	b1.setBackground(Color.PINK);
+    	b2.setBackground(Color.RED);
+    	b3.setBackground(Color.PINK);
+    	b1.setOpaque(true);
+    	b2.setOpaque(true);
+    	b3.setOpaque(true);
+    	frame.setVisible(true);
+    	frame.pack();
+    	
+    	
+    	
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
 
@@ -40,10 +69,26 @@ public class Jukebox implements Runnable {
     
     
 	/* Use this method to add album covers to your Panel. */
-	private JLabel loadImage(String fileName) {
-		URL imageURL = getClass().getResource(fileName);
-		Icon icon = new ImageIcon(imageURL);
-		return new JLabel(icon);
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource().equals(b1)) {
+				song1.play();
+				song2.stop();
+				song3.stop();
+			}
+		if (e.getSource().equals(b2)) {
+			song1.stop();
+			song2.play();
+			song3.stop();
+		}
+		if (e.getSource().equals(b3)) {
+			song1.stop();
+			song2.stop();
+			song3.play();
+		}
 	}
 
 }
