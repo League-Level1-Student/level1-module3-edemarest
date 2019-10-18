@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -54,6 +55,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.addMouseListener(this);
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -73,7 +75,17 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		backgroundImage.getRGB(e.getX(), e.getY());
+		int clickedColor = backgroundImage.getRGB(e.getX(), e.getY());
+		System.out.println(clickedColor);
+		if(clickedColor < -5000000 && clickedColor > -5300000) {
+			JOptionPane.showMessageDialog(null, "You randomly found 1 million dollars on the floor...");
+		}
+		if(clickedColor < -9900000 && clickedColor > -9999999) {
+			JOptionPane.showMessageDialog(null, "You picked up an oreo in the water...");
+		}
+		if(clickedColor < -750000 && clickedColor > -830000) {
+			JOptionPane.showMessageDialog(null, "You just found out that Fortnite got deleted....");
+		}
 	}
 
 	@Override
